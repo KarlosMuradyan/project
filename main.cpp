@@ -86,7 +86,7 @@ class Train{
     string towards;
 	int train_id;
 	int number_of_compartments;
-	Compartments cms[][];
+	Compartments cms;
 	bool bar;
 
 public:
@@ -151,7 +151,7 @@ public:
 		if (bar == true) {
 			return true;
 		}
-		else{false};
+		false;
 	}
 };
 
