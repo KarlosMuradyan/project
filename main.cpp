@@ -62,13 +62,31 @@ using namespace std;
 // };
 
 
+//------------------------------------------------READ && WRITE ----------------------------------------------
 
 
 
 
 
+bool append(string k){
+    ofstream outfile;
+    
+    outfile.open("text.txt", ios_base::app);
+    outfile<< k<<endl;
+    return true;
+}
 
-
+void read(){
+    ifstream file("text.txt");
+    string str;
+    string file_contents;
+    while (getline(file, str))
+    {
+      file_contents += str;
+      file_contents += " ";
+    }  
+    cout<<file_contents;
+}
 
 
 
