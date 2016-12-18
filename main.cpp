@@ -1,92 +1,11 @@
 // TrainReservation.cpp : Defines the entry point for the console application.
 //
-
 #include <iostream>
+#include <stdlib.h>
 #include <string>
+#include <fstream>
+#include <vector>
 using namespace std;
-
-// struct Ticket {
-// 	int train_number;
-// 	int position;
-// 	int price;
-// };
-
-// struct Train {
-// 	string name;
-// 	int train_number;
-// 	Ticket tickets;
-// 	int number_of_tickets;
-// };
-
-// struct Road {
-// 	string start;
-// 	string end;
-// 	double duration_h;
-// 	Train trains;
-// };
-
-
-
-
-// struct Node {
-// 	Node* prev;
-// 	Road value;
-// 	Node* next;
-// };
-
-// class List {
-// 	Node* head;
-// 	int size;
-// 	Node* last;
-
-// public:
-// 	List() {
-// 		head = NULL;
-// 		size = 0;
-// 		last = NULL;
-// 	}
-
-// 	void insert(Road nw) {
-// 		Node* temp = (Node*)malloc(sizeof(Node));
-// 		if (head == NULL) {
-// 			head = temp;
-// 		}
-// 		temp->value = nw;
-// 		temp->next = NULL;
-// 		if (last != NULL) {
-// 			last->next = temp;
-// 		}
-// 		last = temp;
-// 		size++;
-// 	}
-// };
-
-
-//------------------------------------------------READ && WRITE ----------------------------------------------
-
-
-
-
-
-bool append(string k){
-    ofstream outfile;
-    
-    outfile.open("text.txt", ios_base::app);
-    outfile<< k<<endl;
-    return true;
-}
-
-void read(){
-    ifstream file("text.txt");
-    string str;
-    string file_contents;
-    while (getline(file, str))
-    {
-      file_contents += str;
-      file_contents += " ";
-    }  
-    cout<<file_contents;
-}
 
 
 
@@ -172,6 +91,69 @@ public:
 		false;
 	}
 };
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------
+
+
+
+bool ToBool( const string & s ) {
+   return s.at(0) == '1';
+}
+//------------------------------------------------READ && WRITE ----------------------------------------------
+
+
+
+
+
+bool append(string k){
+    ofstream outfile;
+    
+    outfile.open("text.txt", ios_base::app);
+    outfile<< k<<endl;
+    return true;
+}
+
+vector<Train>* read(){
+    
+    istringstream iss("This  is a string");
+    string s;
+    while ( getline( iss, s, ' ' ) ) {
+       cout<<s<<endl;
+    }
+    
+    ifstream file("text.txt");
+    string str;
+    vector<Train> trains;
+    int i=0;
+    while (getline(file, str))
+    {
+        std::vector<std::string> v;
+
+        istringstream iss("This  is a string");
+        string s;
+        while ( getline( iss, s, ' ' ) ) {
+            v[]
+        }
+        int id = stoi(v[0]);
+        int numc = stoi(v[3]);
+        bool b = ToBool(v[4]);
+        trains[i](id, numc, b, v[1], v[2]);
+    }  
+    
+    vector<Train>* ad = &trains;
+    
+    return ad;
+}
+
+
+
 
 
 
@@ -408,16 +390,16 @@ void admin() {
 	int c = 0;
 	while (c != 3) {
 		cout << endl << "~~~///  Menu for admin  \\\~~~" << endl;
-		cout << "Choose    -  1 : Add new train,      2 : Change train details,     3 : End";
+		cout << "Choose    -  1 : Add new train,      2 : Change train details,     3 : End"<<endl<<"Your choice: ";
 		cin >> c;
 		switch (c) {
-			case 1: {
+			case 1: {              //New Train
 			    string starting_p, ending_p;
-			    int ID, num_comp;
+			    int Ids, num_comp;
 			    bool bar;
 			    
                 cout<<"Insert following details about new train."<<endl<<"ID: ";
-                cin>>ID;
+                cin>>Ids;
                 cout<<endl<<"Number of compartments: ";
                 cin>>num_comp;
                 cout<<endl<<"Bar existance(if yes->1, no->0): ";
@@ -428,12 +410,17 @@ void admin() {
                 cin>>ending_p;
                 
                 
+                string wr = to_string(Ids) +  " " + starting_p + " " + ending_p + " " + to_string(num_comp) + " " + to_string(bar);
                 
+                append(wr);
                 
 				break;
+				
+				
 			}
 			case 2: {
-
+                vector<Train>* a =  read();
+                cout<<a;
 			}
 		}
 	}
@@ -452,19 +439,19 @@ int main()
 		cin >> c;
 		cout << endl;
 		switch (c) {
-		case 1: {
+		case 1: {                           //Admin
 			string pass;
 			cout << "Enter password: ";
 			cin >> pass;
 			if (pass == "778k") {
-				//admin();
+				admin();
 			}
 			else {
 				cout << "Your password is not correct." << endl;
 			};
 			break;
 		}
-		case 2: {
+		case 2: {                           //User
 			//user();
 			break;
 		}
