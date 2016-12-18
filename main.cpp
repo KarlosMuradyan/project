@@ -1,3 +1,29 @@
+#include <iostream>
+#include <sstream>
+
+
+
+void s(){
+
+    using namespace std;
+    istringstream iss("This  is a string");
+    string s;
+    while ( getline( iss, s, ' ' ) ) {
+       cout<<s<<endl;
+    }
+}
+
+int main(){
+    
+    s();
+    
+    return 0;
+}
+
+
+
+
+
 // TrainReservation.cpp : Defines the entry point for the console application.
 //
 #include <iostream>
