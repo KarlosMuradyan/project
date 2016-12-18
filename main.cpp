@@ -1,28 +1,3 @@
-#include <iostream>
-#include <sstream>
-
-
-
-void s(){
-
-    using namespace std;
-    istringstream iss("This  is a string");
-    string s;
-    while ( getline( iss, s, ' ' ) ) {
-       cout<<s<<endl;
-    }
-}
-
-int main(){
-    
-    s();
-    
-    return 0;
-}
-
-
-
-
 
 // TrainReservation.cpp : Defines the entry point for the console application.
 //
@@ -31,6 +6,7 @@ int main(){
 #include <string>
 #include <fstream>
 #include <vector>
+#include <sstream>
 using namespace std;
 
 
@@ -148,29 +124,38 @@ bool append(string k){
 
 vector<Train>* read(){
     
-    istringstream iss("This  is a string");
-    string s;
-    while ( getline( iss, s, ' ' ) ) {
-       cout<<s<<endl;
-    }
     
+    cout<<"asdasd";
     ifstream file("text.txt");
     string str;
     vector<Train> trains;
     int i=0;
     while (getline(file, str))
     {
-        std::vector<std::string> v;
+       std::vector<std::string> v;
+        int j=0;
 
-        istringstream iss("This  is a string");
+         istringstream iss(str);
+         cout<<str<<endl;
         string s;
+        if(str.length() > 5){
         while ( getline( iss, s, ' ' ) ) {
-            v[]
+            v[j] = s;
+            j++;
         }
+        cout<<v[2];
         int id = stoi(v[0]);
         int numc = stoi(v[3]);
         bool b = ToBool(v[4]);
-        trains[i](id, numc, b, v[1], v[2]);
+        string four = v[1];
+        string five = v[2];
+        cout<<"asda"<<endl;
+        trains[i].change_start(four);
+        trains[i].change_destination(five);
+        trains[i].change_id(id);
+        trains[i].change_bar(b);
+        trains[i].change_n_of_compartments(numc);
+        }
     }  
     
     vector<Train>* ad = &trains;
@@ -416,7 +401,7 @@ void admin() {
 	int c = 0;
 	while (c != 3) {
 		cout << endl << "~~~///  Menu for admin  \\\~~~" << endl;
-		cout << "Choose    -  1 : Add new train,      2 : Change train details,     3 : End"<<endl<<"Your choice: ";
+		cout << "Choose    -  1 : Add new train,      2 : Remove train,     3 : End"<<endl<<"Your choice: ";  //Print list
 		cin >> c;
 		switch (c) {
 			case 1: {              //New Train
@@ -445,13 +430,25 @@ void admin() {
 				
 			}
 			case 2: {
-                vector<Train>* a =  read();
-                cout<<a;
+                cout<<read();
 			}
 		}
 	}
 }
 
+
+
+
+
+void user(){
+
+    int c=0;
+    cout<<"                  User Menu    ";
+    while(c!=3){
+        cout<<"Choose:         1: Reserve Train        2: See the list      3:End"
+    }
+
+}
 
 
 
@@ -486,4 +483,6 @@ int main()
 		}
 	}
 }
+
+
 
