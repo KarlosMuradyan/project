@@ -116,10 +116,8 @@ bool append(string k){
     return true;
 }
 
-vector<Train>* read(vector<Train>* trains1){
+void read(vector<Train> trains1[]){
     
-    
-    cout<<"asdasd";
     ifstream file("text.txt");
     string str;
     vector<Train> trains(5);
@@ -147,15 +145,14 @@ vector<Train>* read(vector<Train>* trains1){
             trains[i].change_id(id);
             trains[i].change_bar(b);
             trains[i].change_n_of_compartments(numc);
+            cout<<"ID: "<<trains[i].get_id()<<endl;
         }
         i++;
+        
     }  
     
-    vector<Train>* ad = &trains;
-    cout<<"firstttt    ";
-    trains1 = &trains;
-    cout<<ad<<endl<<"Trains1 = "<<trains1<<endl;
-    return ad;
+    
+    *trains1 = trains;
 }
 
 
