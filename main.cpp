@@ -158,6 +158,11 @@ void read(vector<Train> trains1[]){
             cout<<"ID: "<<trains[i].get_id()<<endl;
         }
         i++;
+        // if(i>4){
+        //     trains.resize(trains.size()+5);
+        //     cout<<"New size of a:      "<<a.size()<<endl;
+            
+        // }
         
     }  
     
@@ -255,8 +260,10 @@ void admin() {
                 delete_cont();
                 cout<<"Deleted!"<<endl;
                 for(int i=0; i<a.size(); i++){
-                    string ap_data = to_string(a[i].get_id()) +  " " + a[i].get_start() + " " + a[i].get_destination() + " " + to_string(a[i].get_n_of_compartments()) + " " + to_string(a[i].get_bar());
-                    append(ap_data);
+                    if(a[i].get_start() != "NO" && a[i].get_destination()!="NO"){
+                        string ap_data = to_string(a[i].get_id()) +  " " + a[i].get_start() + " " + a[i].get_destination() + " " + to_string(a[i].get_n_of_compartments()) + " " + to_string(a[i].get_bar());
+                        append(ap_data);
+                    }
                     
                 }
                 break;
@@ -292,9 +299,9 @@ void admin() {
 void user(){
 
     int c=0;
-    cout<<"                  User Menu    ";
+    cout<<"                  User Menu    "<<endl;
     while(c!=3){
-        cout<<"Choose:         1: Reserve Train        2: See the list      3:End";
+        cout<<"Choose:         1: Reserve Train        2: See the list      3:End"<<endl;
         cin>>c;
         
         vector<Train> a(5);
@@ -311,6 +318,13 @@ void user(){
                         int res_id;
                         cout<<"Enter ID: ";
                         cin>>res_id;
+                        
+                        bool exists = false;
+                        for(int i=0; i<a.size(); i++){
+                            if(a[i].get_id() == res_id){
+                                exists = true;
+                            }
+                        }
                         
                         string f_name, s_name, addr, passp;
                         int ph_number;
@@ -331,7 +345,7 @@ void user(){
                         
                         //--------------------------------------------------------------------------------------------???????????????????????????????????????????????
                         
-                        
+                        break;
                         
                     } 
                     
@@ -339,7 +353,8 @@ void user(){
                         string res_start;
                         cout<<"Enter the starting point of the train: ";
                         cin>>res_start;
-                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
+                        
+                        cout<<endl<<endl<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
                         
                         for(int i=0; i<a.size(); i++){
                             if(a[i].get_start() == res_start){
@@ -347,7 +362,10 @@ void user(){
                             }
                         }
                         
+                        cout<<endl<<endl;
                         break;
+                        
+                        
                     
                     }
                     
@@ -355,13 +373,15 @@ void user(){
                         string res_dest;
                         cout<<"Enter the destination of the train: ";
                         cin>>res_dest;
-                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
+                        cout<<endl<<endl<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
                         
                         for(int i=0; i<a.size(); i++){
-                            if(a[i].get_start() == res_dest){
+                            if(a[i].get_destination() == res_dest){
                                 cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_start() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments() << setw(15) << a[i].get_bar()<<endl;
                             }
                         }
+                        
+                        cout<<endl<<endl;
                         
                         break;
                     }
@@ -370,6 +390,7 @@ void user(){
                         break;
                     }
                 }
+                break;
             }
             
             case 2:{
@@ -420,7 +441,7 @@ int main()
 			break;
     		}
     		case 2: {                           //User
-    			//user();
+    			user();
     			break;
     		}
     		default:{
