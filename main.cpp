@@ -29,6 +29,12 @@ class Train{
 public:
 	Train() {
 		from = "NO";
+		towards = "NO";
+		train_id = 0;
+		number_of_compartments = 0;
+		bar = 0;
+		cms.places = 20;
+		cms.price_for_place = 20;
 	}
 
 	void change_id(int new_id) {
@@ -227,12 +233,12 @@ void admin() {
 			}
 			case 2: {
 			    vector<Train> a(5);
-			    read(*&a);
+			    read(&a);
 			    
-			    cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+			    cout<<setw(5)<< "Index" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
 			    
 			    for(int i=0; i<a.size(); i++){
-			        cout<<stew(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+			        cout<<setw(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_start() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments() << setw(15) << a[i].get_bar()<<endl;
 			    }
 			    int ind;
 			    cout<<"Which train you want to remove. Give the index: ";
@@ -251,12 +257,12 @@ void admin() {
 			
 			case 3:{
 			    vector<Train> a(5);
-			    read(*&a);
+			    read(&a);
 			    
-			    cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+			    cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
 			    
 			    for(int i=0; i<a.size(); i++){
-			        cout<<stew(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+			        cout<<setw(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_start() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments() << setw(15) << a[i].get_bar()<<endl;
 			    }
 			    
 			    break;
@@ -281,18 +287,18 @@ void user(){
     cout<<"                  User Menu    ";
     while(c!=3){
         cout<<"Choose:         1: Reserve Train        2: See the list      3:End";
-        cin<<c;
+        cin>>c;
         
         vector<Train> a(5);
-	    read(*&a);
+        read(&a);
         
-        swich(c){
+        switch(c){
             case 1:{
                 int c1;
                 cout<<"Reserving Train:"<<endl;
                 cout<<"Choose:       1:Reserve by ID      2: Search by starting point     3: Search by destination     4:End"<<endl;
                 cin>>c1;
-                swich(c1){
+                switch(c1){
                     case 1:{
                         int res_id;
                         cout<<"Enter ID: ";
@@ -325,11 +331,11 @@ void user(){
                         string res_start;
                         cout<<"Enter the starting point of the train: ";
                         cin>>res_start;
-                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
                         
                         for(int i=0; i<a.size(); i++){
-                            if(a[i].get_start == res_start){
-                                cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+                            if(a[i].get_start() == res_start){
+                                cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_start() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments() << setw(15) << a[i].get_bar()<<endl;
                             }
                         }
                         
@@ -341,11 +347,11 @@ void user(){
                         string res_dest;
                         cout<<"Enter the destination of the train: ";
                         cin>>res_dest;
-                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
                         
                         for(int i=0; i<a.size(); i++){
-                            if(a[i].get_start == res_dest){
-                                cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+                            if(a[i].get_start() == res_dest){
+                                cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_start() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments() << setw(15) << a[i].get_bar()<<endl;
                             }
                         }
                         
@@ -359,10 +365,10 @@ void user(){
             }
             
             case 2:{
-                cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+                cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
 			    
 			    for(int i=0; i<a.size(); i++){
-			        cout<<stew(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+			        cout<<setw(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_start() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments() << setw(15) << a[i].get_bar()<<endl;
 			    }
             }
             
@@ -404,13 +410,14 @@ int main()
 				cout << "Your password is not correct." << endl;
 			};
 			break;
-		}
-		case 2: {                           //User
-			//user();
-			break;
-		}
-		default:
-			break;
+    		}
+    		case 2: {                           //User
+    			//user();
+    			break;
+    		}
+    		default:{
+    			break;
+    		}
 		}
 	}
 }
