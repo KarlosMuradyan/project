@@ -4,6 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <sstream>
+#include <iomanip>
 using namespace std;
 
 
@@ -115,7 +116,7 @@ bool append(string k){
     return true;
 }
 
-vector<Train>* read(){
+vector<Train>* read(vector<Train>* trains1){
     
     
     cout<<"asdasd";
@@ -141,7 +142,7 @@ vector<Train>* read(){
             bool b = ToBool(v[4]);
             string four = v[1];
             string five = v[2];
-            trains[i].change_start("four");
+            trains[i].change_start(four);
             trains[i].change_destination(five);
             trains[i].change_id(id);
             trains[i].change_bar(b);
@@ -151,22 +152,24 @@ vector<Train>* read(){
     }  
     
     vector<Train>* ad = &trains;
-    
+    cout<<"firstttt    ";
+    trains1 = &trains;
+    cout<<ad<<endl<<"Trains1 = "<<trains1<<endl;
     return ad;
 }
 
 
-void rr(vector<Train> a){
-    int number_of_lines = 0;
-    std::string line;
-    std::ifstream myfile("text.txt");
+// void rr(vector<Train>* a){
+//     int number_of_lines = 0;
+//     std::string line;
+//     std::ifstream myfile("text.txt");
 
-    while (std::getline(myfile, line))
-        ++number_of_lines;
+//     while (std::getline(myfile, line))
+//         ++number_of_lines;
     
-    a.resize(number_of_lines);
-    read(a);
-}
+//     a.resize(number_of_lines);
+//     read(a);
+// }
 
 
 
@@ -401,9 +404,9 @@ int place_price(int train_id, int place) {
 
 void admin() {
 	int c = 0;
-	while (c != 3) {
+	while (c != 4) {
 		cout << endl << "~~~///  Menu for admin  \\\~~~" << endl;
-		cout << "Choose    -  1 : Add new train,      2 : Remove train,     3 : End"<<endl<<"Your choice: ";  //Print list
+		cout << "Choose    -  1 : Add new train,      2 : Remove train,     3 : Print List,       4:End "<<endl<<"Your choice: ";  //Print list
 		cin >> c;
 		switch (c) {
 			case 1: {              //New Train
@@ -432,9 +435,47 @@ void admin() {
 				
 			}
 			case 2: {
-                vector<Train>* a(5) = read();
-                cout<<endl<<"First"<<a[0].get_id();
+			    vector<Train> a(5);
+			    read(*&a);
+			    
+			    cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+			    
+			    for(int i=0; i<a.size(); i++){
+			        cout<<stew(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+			    }
+			    int ind;
+			    cout<<"Which train you want to remove. Give the index: ";
+                cin>>ind;
+                
+                for(int i=ind-1; i<a.size()-1; i++){
+                    a[i] = a[i+1];
+                }
+                a.resize(a.size()-1);
+                
+                cout<<"Deleted!"<<endl;
+                
+                break;
+                // cout<<endl<<"First"<<a[0].get_start();
 			}
+			
+			case 3:{
+			    vector<Train> a(5);
+			    read(*&a);
+			    
+			    cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+			    
+			    for(int i=0; i<a.size(); i++){
+			        cout<<stew(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+			    }
+			    
+			    break;
+			}
+			
+			default:{
+			    break;
+			}
+			
+			
 		}
 	}
 }
@@ -449,6 +490,81 @@ void user(){
     cout<<"                  User Menu    ";
     while(c!=3){
         cout<<"Choose:         1: Reserve Train        2: See the list      3:End";
+        cin<<c;
+        
+        vector<Train> a(5);
+	    read(*&a);
+        
+        swich(c){
+            case 1:
+                int c1;
+                cout<<"Reserving Train:"<<endl;
+                cout<<"Choose:       1:Reserve by ID      2: Search by starting point     3: Search by destination     4:End"<<endl;
+                cin>>c1;
+                swich(c1){
+                    case 1:{
+                        int res_id;
+                        cout<<"Enter ID: ";
+                        cin>>res_id;
+                        
+                        string f_name, s_name, addr, passp;
+                        int ph_number;
+                        
+                        cout<<"Enter your personal information:"<<endl<<"First name: ";
+                        cin>>f_name;
+                        cout<<"Last Name: ";
+                        cin>>s_name;
+                        cout<<"Pasport ID: ";
+                        cin>>passp;
+                        cout<<"Address: ";
+                        cin>>addr;
+                        cout<<"Phone Number: ";
+                        cin>>ph_number;
+                        
+                    } 
+                    
+                    case 2:{
+                        string res_start;
+                        cout<<"Enter the starting point of the train: ";
+                        cin>>res_start;
+                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+                        
+                        for(int i=0; i<a.size(); i++){
+                            if(a[i].get_start == res_start){
+                                cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+                            }
+                        }
+                        
+                        break;
+                    
+                    }
+                    
+                    case 3:{
+                        string res_dest;
+                        cout<<"Enter the destination of the train: ";
+                        cin>>res_dest;
+                        cout<<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+                        
+                        for(int i=0; i<a.size(); i++){
+                            if(a[i].get_start == res_dest){
+                                cout<< setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+                            }
+                        }
+                        
+                        break;
+                    }
+                    
+                    default:{
+                        break;
+                    }
+                }
+                
+        }
+        
+        
+        
+        
+        
     }
 
 }
