@@ -1,3 +1,5 @@
+//Create text.txt file for storing data
+
 #include <iostream>
 #include <stdlib.h>
 #include <string>
