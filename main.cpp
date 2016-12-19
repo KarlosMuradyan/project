@@ -112,7 +112,11 @@ bool ToBool( const string & s ) {
 
 
 
-
+void delete_cont(){
+    ofstream ofs;
+    ofs.open("text.txt", std::ofstream::out | std::ofstream::trunc);
+    ofs.close();
+}
 
 bool append(string k){
     ofstream outfile;
@@ -248,16 +252,20 @@ void admin() {
                     a[i] = a[i+1];
                 }
                 a.resize(a.size()-1);
-                
+                delete_cont();
                 cout<<"Deleted!"<<endl;
-                
+                for(int i=0; i<a.size(); i++){
+                    string ap_data = to_string(a[i].get_id()) +  " " + a[i].get_start() + " " + a[i].get_destination() + " " + to_string(a[i].get_n_of_compartments()) + " " + to_string(a[i].get_bar());
+                    append(ap_data);
+                    
+                }
                 break;
-                // cout<<endl<<"First"<<a[0].get_start();
 			}
 			
 			case 3:{
 			    vector<Train> a(5);
 			    read(&a);
+			    cout<<"Size of a: "<<a.size()<<endl;
 			    
 			    cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<endl;
 			    
