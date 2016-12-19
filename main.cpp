@@ -496,7 +496,7 @@ void user(){
 	    read(*&a);
         
         swich(c){
-            case 1:
+            case 1:{
                 int c1;
                 cout<<"Reserving Train:"<<endl;
                 cout<<"Choose:       1:Reserve by ID      2: Search by starting point     3: Search by destination     4:End"<<endl;
@@ -520,6 +520,13 @@ void user(){
                         cin>>addr;
                         cout<<"Phone Number: ";
                         cin>>ph_number;
+                        
+                        
+                        
+                        
+                        //--------------------------------------------------------------------------------------------???????????????????????????????????????????????
+                        
+                        
                         
                     } 
                     
@@ -558,7 +565,19 @@ void user(){
                         break;
                     }
                 }
-                
+            }
+            
+            case 2:{
+                cout<<setw(5)<< "N" <<setw(15)<<"ID" << setw(15)<< "from" << setw(15) << "to" << setw(15) << "Number of Comp" << setw(15) << "Has bar"<<ednl;
+			    
+			    for(int i=0; i<a.size(); i++){
+			        cout<<stew(5)<< i+1 << setw(15)<< a[i].get_id() << setw(15)<< a[i].get_from() << setw(15) << a[i].get_destination() << setw(15) << a[i].get_n_of_compartments << setw(15) << a[i].get_bar()<<endl;
+			    }
+            }
+            
+            default:{
+                break;
+            }
         }
         
         
