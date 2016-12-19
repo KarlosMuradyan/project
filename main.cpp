@@ -1,6 +1,3 @@
-
-// TrainReservation.cpp : Defines the entry point for the console application.
-//
 #include <iostream>
 #include <stdlib.h>
 #include <string>
@@ -29,12 +26,8 @@ class Train{
 	bool bar;
 
 public:
-	Train(int id, int n, bool i, string f, string t) {
-		train_id = id;
-		number_of_compartments = n;
-		bar = i;
-		from = f;
-		towards = t;
+	Train() {
+		from = "NO";
 	}
 
 	void change_id(int new_id) {
@@ -128,34 +121,33 @@ vector<Train>* read(){
     cout<<"asdasd";
     ifstream file("text.txt");
     string str;
-    vector<Train> trains;
+    vector<Train> trains(5);
     int i=0;
     while (getline(file, str))
     {
-       std::vector<std::string> v;
+        string v[5];
         int j=0;
 
-         istringstream iss(str);
-         cout<<str<<endl;
+        istringstream iss(str);
+        cout<<str<<endl;
         string s;
         if(str.length() > 5){
-        while ( getline( iss, s, ' ' ) ) {
-            v[j] = s;
-            j++;
+            while ( getline( iss, s, ' ' ) ) {
+                v[j] = s;
+                j++;
+            }
+            int id = stoi(v[0]);
+            int numc = stoi(v[3]);
+            bool b = ToBool(v[4]);
+            string four = v[1];
+            string five = v[2];
+            trains[i].change_start("four");
+            trains[i].change_destination(five);
+            trains[i].change_id(id);
+            trains[i].change_bar(b);
+            trains[i].change_n_of_compartments(numc);
         }
-        cout<<v[2];
-        int id = stoi(v[0]);
-        int numc = stoi(v[3]);
-        bool b = ToBool(v[4]);
-        string four = v[1];
-        string five = v[2];
-        cout<<"asda"<<endl;
-        trains[i].change_start(four);
-        trains[i].change_destination(five);
-        trains[i].change_id(id);
-        trains[i].change_bar(b);
-        trains[i].change_n_of_compartments(numc);
-        }
+        i++;
     }  
     
     vector<Train>* ad = &trains;
@@ -164,7 +156,17 @@ vector<Train>* read(){
 }
 
 
+void rr(vector<Train> a){
+    int number_of_lines = 0;
+    std::string line;
+    std::ifstream myfile("text.txt");
 
+    while (std::getline(myfile, line))
+        ++number_of_lines;
+    
+    a.resize(number_of_lines);
+    read(a);
+}
 
 
 
@@ -430,7 +432,8 @@ void admin() {
 				
 			}
 			case 2: {
-                cout<<read();
+                vector<Train>* a(5) = read();
+                cout<<endl<<"First"<<a[0].get_id();
 			}
 		}
 	}
@@ -445,7 +448,7 @@ void user(){
     int c=0;
     cout<<"                  User Menu    ";
     while(c!=3){
-        cout<<"Choose:         1: Reserve Train        2: See the list      3:End"
+        cout<<"Choose:         1: Reserve Train        2: See the list      3:End";
     }
 
 }
@@ -455,6 +458,8 @@ void user(){
 
 int main()
 {
+    
+    
 	int c=0;
 	cout << "Train reservation center." << endl <<endl;
 	while (c != 3) {
@@ -483,6 +488,3 @@ int main()
 		}
 	}
 }
-
-
-
